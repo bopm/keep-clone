@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { card } from '../models/card';
 
 @Component({
   selector: 'app-card',
@@ -15,11 +16,11 @@ import {Component, Input, OnInit} from '@angular/core';
   `,
   styles: [
     '.card {margin-top: 1.5rem;}'
-  ],
-  host: {'class': 'col-2'}
+  ]
 })
 export class CardComponent implements OnInit {
-  @Input() card:any;
+  @HostBinding('class') class = 'col-2';
+  @Input() card: card;
 
   constructor() { }
 

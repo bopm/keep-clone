@@ -23,12 +23,11 @@ import { card } from '../models/card';
   styles: []
 })
 export class CardListComponent implements OnInit {
-  @Input() cards: Array<any>;
+  @Input() cards: Array<card>;
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.cards);
   }
 
   getPinned(cards, pinned = true) {
