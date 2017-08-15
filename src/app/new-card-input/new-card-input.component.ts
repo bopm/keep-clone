@@ -1,16 +1,18 @@
 import {Component, EventEmitter, HostBinding, HostListener, OnInit, Output, ViewChild} from '@angular/core';
 import {card} from '../models/card';
-import {NgForm} from '@angular/forms';
+
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
+import 'rxjs/add/operator/takeWhile';
+import 'rxjs/add/operator/debounceTime';
+
 
 @Component({
   selector: 'app-new-card-input',
   template: `
     <div class="card">
       <div class="card-block">
-        <form #form="ngForm">
-          <input placeholder="Take a note..." class="form-control" name="text" [(ngModel)]="newCard.text" required>
-        </form>
-        {{ form.value | json }}
+        <input placeholder="Take a note..." class="form-control" name="text" [formControl]="newCardForm.controls['text']">
       </div>
     </div>
   `,
@@ -21,25 +23,26 @@ import {NgForm} from '@angular/forms';
 export class NewCardInputComponent implements OnInit {
   @HostBinding('class') class = 'col-8';
   @Output() onCardAdd = new EventEmitter<string>();
-
-  @ViewChild('form') public form: NgForm;
-
-  public newCard: card = {text: ''};
+  newCardForm: FormGroup;
 
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.charCode === 13 && this.form.valid) {
-      this.addCard(this.form.value.text);
+    if (event.charCode === 13 && this.newCardForm.valid) {
+      this.addCard(this.newCardForm.controls['text'].value);
     }
   }
 
-  constructor() { }
+  constructor(fb: FormBuilder) {
+    this.newCardForm = fb.group({
+      'text': [null, Validators.compose([Validators.required, Validators.minLength(2)])],
+    });
+  }
 
   ngOnInit() {
   }
 
   addCard(text) {
     this.onCardAdd.emit(text);
-    this.newCard.text = '';
+    this.newCardForm.controls['text'].setValue('');
   }
 }
