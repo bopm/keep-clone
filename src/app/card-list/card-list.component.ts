@@ -1,6 +1,4 @@
-import {Component, Input, OnInit, OnDestroy} from '@angular/core';
-import { filter } from 'lodash';
-import { card } from '../models/card';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import * as fromRoot from '../reducers';
 import 'rxjs/add/operator/takeWhile';
 import 'rxjs/add/operator/map';
@@ -29,16 +27,11 @@ import * as data from '../actions/data';
   styles: []
 })
 export class CardListComponent implements OnInit, OnDestroy {
-  public cards: Array<card> = [];
-  public cards$: Observable<card[]>;
   public anyPinned$: Observable<boolean>;
   private alive = true;
 
   constructor(private store: Store<fromRoot.State>) {
     this.anyPinned$ = this.getPinned().takeWhile(() => this.alive).map((cards) => cards.length > 0);
-    this.store.select(fromRoot.getCards).takeWhile(() => this.alive).subscribe(val => {
-      this.cards = val;
-    });
   }
 
   ngOnInit() {

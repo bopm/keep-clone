@@ -1,12 +1,9 @@
 import {Component, EventEmitter, HostBinding, HostListener, OnInit, Output, OnDestroy} from '@angular/core';
-import {card} from '../models/card';
-
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import 'rxjs/add/operator/takeWhile';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/filter';
-import {dummyValidator} from '../shared/dummy.validator';
 import {Store} from '@ngrx/store';
 import * as fromRoot from '../reducers';
 import * as data from '../actions/data';
