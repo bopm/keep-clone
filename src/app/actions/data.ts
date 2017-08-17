@@ -4,7 +4,8 @@ import {card} from '../models/card';
 
 export const ActionTypes = {
   ADD: type('[Data] Add Card'),
-  REMOVE: type('[Data] Remove Card')
+  REMOVE: type('[Data] Remove Card'),
+  UPDATE: type('[Data] Update Card'),
 };
 
 export class AddAction implements Action {
@@ -19,6 +20,13 @@ export class RemoveAction implements Action {
   constructor(public payload: card) { }
 }
 
+export class UpdateAction implements Action {
+  type = ActionTypes.UPDATE;
+
+  constructor(public payload: card) { }
+}
+
 export type Actions
   = AddAction
-  | RemoveAction;
+  | RemoveAction
+  | UpdateAction;

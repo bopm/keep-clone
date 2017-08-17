@@ -24,8 +24,8 @@ const reducers = {
   ui: fromUi.reducer
 };
 
-const developmentReducer: ActionReducer<State> = compose(storeLogger(), storeFreeze, combineReducers)(reducers);
-const productionReducer: ActionReducer<State> = compose(combineReducers)(reducers);
+const developmentReducer: ActionReducer<State> = compose(storeLogger(), localStorageSync({keys: ['ui', 'data'], rehydrate: true}), storeFreeze, combineReducers)(reducers);
+const productionReducer: ActionReducer<State> = compose(localStorageSync({keys: ['ui', 'data'], rehydrate: true}), combineReducers)(reducers);
 
 export function reducer(state: any, action: any) {
   if (environment.production) {

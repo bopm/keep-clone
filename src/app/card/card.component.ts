@@ -7,7 +7,7 @@ import { card } from '../models/card';
     <div class="card">
       <div class="card-block">
         <label class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" [checked]="card.pinned" (change)="card.pinned = !card.pinned" />
+          <input type="checkbox" class="custom-control-input" [checked]="card.pinned" (change)="updatePinned()" />
           <span class="custom-control-indicator"></span>
         </label>
         <button type="button" class="close" aria-label="Close" (click)="removeCard()">
@@ -25,6 +25,7 @@ export class CardComponent implements OnInit {
   @HostBinding('class') class = 'col-2';
   @Input() card: card;
   @Output() 'onRemove' = new EventEmitter<card>();
+  @Output() 'onUpdate' = new EventEmitter<card>();
 
   constructor() { }
 
@@ -35,4 +36,8 @@ export class CardComponent implements OnInit {
     this.onRemove.emit(this.card);
   }
 
+  updatePinned() {
+    this.card.pinned = !this.card.pinned;
+    this.onUpdate.emit(this.card);
+  }
 }

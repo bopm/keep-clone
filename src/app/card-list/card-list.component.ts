@@ -12,7 +12,10 @@ import * as data from '../actions/data';
     <div class="container-fluid text-center pb-5" *ngIf="anyPinned$ | async">
       <div class="row"><p class="h6 col-2">Pinned</p></div>
       <div class="row">
-        <app-card *ngFor="let card of getPinned() | async" [card]="card" (onRemove)="removeCard($event)"></app-card>
+        <app-card *ngFor="let card of getPinned() | async"
+                  [card]="card"
+                  (onRemove)="removeCard($event)"
+                  (onUpdate)="updateCard($event)"></app-card>
       </div>
     </div>
     <div class="container-fluid text-center pb-5">
@@ -20,7 +23,10 @@ import * as data from '../actions/data';
         <p class="h6 col-2" *ngIf="anyPinned$ | async">Others</p>
       </div>
       <div class="row">
-        <app-card *ngFor="let card of getPinned(false) | async" [card]="card" (onRemove)="removeCard($event)"></app-card>
+        <app-card *ngFor="let card of getPinned(false) | async"
+                  [card]="card"
+                  (onRemove)="removeCard($event)"
+                  (onUpdate)="updateCard($event)"></app-card>
       </div>
     </div>
   `,
@@ -45,6 +51,10 @@ export class CardListComponent implements OnInit, OnDestroy {
     return this.store.select(fromRoot.getCards)
       .takeWhile(() => this.alive)
       .map((cardArr) => cardArr.filter(card => pinned ? card.pinned === true : card.pinned  !== true));
+  }
+
+  updateCard(card) {
+    this.store.dispatch(new data.UpdateAction(card));
   }
 
   removeCard(card) {

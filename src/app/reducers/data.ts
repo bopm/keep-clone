@@ -5,13 +5,17 @@ import { merge, without, clone, trim } from 'lodash';
 
 
 export function reducer(state = dataModel.defaults, action: Action): dataModel.Data {
+  let stateCopy = clone(state);
   switch (action.type) {
     case data.ActionTypes.ADD:
       return merge({}, state, {cards: [ ...state.cards, {text: trim(action.payload)} ]});
+    case data.ActionTypes.UPDATE:
+      stateCopy.cards = without(state.cards, action.payload);
+      stateCopy.cards.push(action.payload);
+      return merge({}, stateCopy);
     case data.ActionTypes.REMOVE:
-      let stateCopy = clone(state);
       stateCopy.cards = [];
-      return merge({}, stateCopy.cards, {cards: without(state.cards, action.payload)});
+      return merge({}, stateCopy);
     default:
       return state;
   }
