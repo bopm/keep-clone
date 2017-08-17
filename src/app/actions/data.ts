@@ -10,7 +10,7 @@ export const ActionTypes = {
 export class AddAction implements Action {
   type = ActionTypes.ADD;
 
-  constructor(public payload: card) { }
+  constructor(public payload: string) { }
 }
 
 export class RemoveAction implements Action {

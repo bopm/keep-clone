@@ -1,13 +1,13 @@
 import { Action } from '@ngrx/store';
 import * as dataModel from '../models/data';
 import * as data from '../actions/data';
-import { merge, without, clone } from 'lodash';
+import { merge, without, clone, trim } from 'lodash';
 
 
 export function reducer(state = dataModel.defaults, action: Action): dataModel.Data {
   switch (action.type) {
     case data.ActionTypes.ADD:
-      return merge({}, state, {cards: [ ...state.cards, action.payload ]});
+      return merge({}, state, {cards: [ ...state.cards, {text: trim(action.payload)} ]});
     case data.ActionTypes.REMOVE:
       let stateCopy = clone(state);
       stateCopy.cards = [];

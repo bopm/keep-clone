@@ -51,7 +51,7 @@ export class NewCardInputComponent implements OnInit, OnDestroy {
   }
 
   addCard(text) {
-    this.store.dispatch(new data.AddAction({text: text}));
+    this.store.dispatch(new data.AddAction(text));
     this.newCardForm.controls['text'].setValue('');
     // this.newCardForm.reset();
   }
