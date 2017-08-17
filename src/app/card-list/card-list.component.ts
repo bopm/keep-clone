@@ -15,7 +15,7 @@ import * as data from '../actions/data';
         <app-card *ngFor="let card of getPinned() | async"
                   [card]="card"
                   (onRemove)="removeCard($event)"
-                  (onUpdate)="updateCard($event)"></app-card>
+                  (onPinnedToggle)="togglePinned($event)"></app-card>
       </div>
     </div>
     <div class="container-fluid text-center pb-5">
@@ -26,7 +26,7 @@ import * as data from '../actions/data';
         <app-card *ngFor="let card of getPinned(false) | async"
                   [card]="card"
                   (onRemove)="removeCard($event)"
-                  (onUpdate)="updateCard($event)"></app-card>
+                  (onPinnedToggle)="togglePinned($event)"></app-card>
       </div>
     </div>
   `,
@@ -53,8 +53,8 @@ export class CardListComponent implements OnInit, OnDestroy {
       .map((cardArr) => cardArr.filter(card => pinned ? card.pinned === true : card.pinned  !== true));
   }
 
-  updateCard(card) {
-    this.store.dispatch(new data.UpdateAction(card));
+  togglePinned(card) {
+    this.store.dispatch(new data.TogglePinnedAction(card));
   }
 
   removeCard(card) {

@@ -9,9 +9,11 @@ export function reducer(state = dataModel.defaults, action: Action): dataModel.D
   switch (action.type) {
     case data.ActionTypes.ADD:
       return merge({}, state, {cards: [ ...state.cards, {text: trim(action.payload)} ]});
-    case data.ActionTypes.UPDATE:
+    case data.ActionTypes.TOGGLE_PINNED:
       stateCopy.cards = without(state.cards, action.payload);
-      stateCopy.cards.push(action.payload);
+      let card = clone(action.payload);
+      card.pinned = !card.pinned;
+      stateCopy.cards.push(card);
       return merge({}, stateCopy);
     case data.ActionTypes.REMOVE:
       stateCopy.cards = [];

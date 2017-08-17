@@ -25,7 +25,7 @@ export class CardComponent implements OnInit {
   @HostBinding('class') class = 'col-2';
   @Input() card: card;
   @Output() 'onRemove' = new EventEmitter<card>();
-  @Output() 'onUpdate' = new EventEmitter<card>();
+  @Output() 'onPinnedToggle' = new EventEmitter<card>();
 
   constructor() { }
 
@@ -37,7 +37,6 @@ export class CardComponent implements OnInit {
   }
 
   updatePinned() {
-    this.card.pinned = !this.card.pinned;
-    this.onUpdate.emit(this.card);
+    this.onPinnedToggle.emit(this.card);
   }
 }
