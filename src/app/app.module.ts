@@ -6,6 +6,8 @@ import { CardComponent } from './card/card.component';
 import { CardListComponent } from './card-list/card-list.component';
 import { NewCardInputComponent } from './new-card-input/new-card-input.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {reducer} from "./reducers/index";
+import {StoreModule} from "@ngrx/store";
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    StoreModule.provideStore(reducer),
   ],
   providers: [],
   bootstrap: [AppComponent]

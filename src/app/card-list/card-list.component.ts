@@ -1,6 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, OnDestroy} from '@angular/core';
 import { filter } from 'lodash';
 import { card } from '../models/card';
+import * as fromRoot from '../reducers';
+import 'rxjs/add/operator/takeWhile';
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-card-list',
@@ -22,12 +25,21 @@ import { card } from '../models/card';
   `,
   styles: []
 })
-export class CardListComponent implements OnInit {
-  @Input() cards: Array<card>;
+export class CardListComponent implements OnInit, OnDestroy {
+  public cards: Array<card> = [];
+  private alive: boolean = true;
 
-  constructor() { }
+  constructor(private store: Store<fromRoot.State>) {
+    this.store.select(fromRoot.getCards).takeWhile(() => this.alive).subscribe(val => {
+      this.cards = val;
+    });
+  }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 
   getPinned(cards, pinned = true) {

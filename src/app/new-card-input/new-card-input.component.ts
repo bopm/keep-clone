@@ -7,7 +7,9 @@ import 'rxjs/add/operator/takeWhile';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/filter';
 import {dummyValidator} from '../shared/dummy.validator';
-
+import {Store} from '@ngrx/store';
+import * as fromRoot from '../reducers';
+import * as data from '../actions/data';
 
 @Component({
   selector: 'app-new-card-input',
@@ -35,7 +37,7 @@ export class NewCardInputComponent implements OnInit, OnDestroy {
     }
   }
 
-  constructor(fb: FormBuilder) {
+  constructor(private store: Store<fromRoot.State>, fb: FormBuilder) {
     this.newCardForm = fb.group({
       'text': [null, Validators.compose([Validators.required, Validators.minLength(2), dummyValidator])],
     });
@@ -57,7 +59,7 @@ export class NewCardInputComponent implements OnInit, OnDestroy {
   }
 
   addCard(text) {
-    this.onCardAdd.emit(text);
+    this.store.dispatch(new data.AddAction({text: text}));
     this.newCardForm.controls['text'].setValue('');
     // this.newCardForm.reset();
   }
