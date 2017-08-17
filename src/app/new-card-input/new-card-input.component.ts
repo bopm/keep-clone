@@ -39,16 +39,8 @@ export class NewCardInputComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<fromRoot.State>, fb: FormBuilder) {
     this.newCardForm = fb.group({
-      'text': [null, Validators.compose([Validators.required, Validators.minLength(2), dummyValidator])],
+      'text': [null, Validators.compose([Validators.required, Validators.minLength(2)])],
     });
-
-    this.newCardForm.valueChanges
-      .filter((value) => this.newCardForm.valid)
-      .debounceTime(1000)
-      .takeWhile(() => this.alive)
-      .subscribe(data => {
-        console.log(data);
-      });
   }
 
   ngOnInit() {
