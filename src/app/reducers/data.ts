@@ -16,8 +16,8 @@ export function reducer(state = dataModel.defaults, action: Action): dataModel.D
       stateCopy.cards.push(card);
       return merge({}, stateCopy);
     case data.ActionTypes.REMOVE:
-      stateCopy.cards = [];
-      return merge({}, stateCopy, {cards: without(state.cards, action.payload)});
+      stateCopy.cards = without(state.cards, action.payload);
+      return merge({}, stateCopy);
     default:
       return state;
   }
