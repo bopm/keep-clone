@@ -5,8 +5,8 @@ import 'rxjs/add/operator/takeWhile';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/filter';
 import {Store} from '@ngrx/store';
-import * as fromRoot from '../reducers';
-import * as data from '../actions/data';
+import * as fromRoot from '../../reducers';
+import * as data from '../../actions/data';
 
 @Component({
   selector: 'app-new-card-input',

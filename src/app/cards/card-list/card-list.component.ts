@@ -1,10 +1,10 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import * as fromRoot from '../reducers';
+import * as fromRoot from '../../reducers';
 import 'rxjs/add/operator/takeWhile';
 import 'rxjs/add/operator/map';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
-import * as data from '../actions/data';
+import * as data from '../../actions/data';
 import {clone} from 'lodash';
 
 @Component({

@@ -12,14 +12,12 @@ import * as data from './actions/data';
          [ngStyle]="{'background-color': toolbarColor$ | async}">
       <a class="navbar-brand" href="#">Keep Clone</a>
       <app-color-input></app-color-input>
+
+      <a class="nav-link" uiSref="about">About</a>
+      <a class="nav-link" uiSref="cards">Cards</a>
     </nav>
     <toaster-container></toaster-container>
-    <div class="container-fluid text-center pb-5">
-      <div class="row justify-content-end">
-        <app-new-card-input></app-new-card-input>
-      </div>
-    </div>
-    <app-card-list></app-card-list>
+    <ui-view></ui-view>
   `,
   styles: [],
 })

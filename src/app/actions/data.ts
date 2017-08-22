@@ -3,6 +3,8 @@ import { type } from '../util';
 import {card} from '../models/card';
 
 export const ActionTypes = {
+  LOAD: type('[Data] Load Cards'),
+  LOAD_SUCCESS: type('[Data] Load Cards Success'),
   ADD: type('[Data] Add Card'),
   REMOVE: type('[Data] Remove Card'),
   REMOVE_SUCCESS: type('[Data] Server Remove Success Card'),
@@ -15,6 +17,16 @@ export const ActionTypes = {
   REFRESH_TOKEN_SUCCESS: type('[Data] Refresh Token Success'),
   REFRESH_TOKEN_FAIL: type('[Data] Refresh Token Fail'),
 };
+
+export class LoadAction implements Action {
+  type = ActionTypes.LOAD;
+}
+
+export class LoadSuccessAction implements Action {
+  type = ActionTypes.LOAD_SUCCESS;
+
+  constructor(public payload: any) { }
+}
 
 export class AddAction implements Action {
   type = ActionTypes.ADD;
@@ -77,7 +89,9 @@ export class RefreshTokenFailAction implements Action {
 }
 
 export type Actions
-  = AddAction
+  = LoadAction
+  | LoadSuccessAction
+  | AddAction
   | RemoveAction
   | RemoveSuccessAction
   | TogglePinnedAction

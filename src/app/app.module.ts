@@ -1,10 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { CardComponent } from './card/card.component';
-import { CardListComponent } from './card-list/card-list.component';
-import { NewCardInputComponent } from './new-card-input/new-card-input.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {reducer} from './reducers/index';
 import {StoreModule} from '@ngrx/store';
@@ -15,14 +12,15 @@ import {DataEffects} from './effects/data';
 import {DataService} from './services/data.service';
 import {ToasterModule} from 'angular2-toaster';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { UIRouterModule } from '@uirouter/angular';
+import { MAIN_STATES, uiRouterConfigFn } from './app.states';
+import {AboutComponent} from './about/about';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CardComponent,
-    CardListComponent,
-    NewCardInputComponent,
-    ColorInputComponent
+    ColorInputComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -32,9 +30,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     StoreModule.provideStore(reducer),
     EffectsModule.run(DataEffects),
-    ToasterModule
+    ToasterModule,
+    UIRouterModule.forRoot({
+      states: MAIN_STATES,
+      useHash: true,
+      config: uiRouterConfigFn
+    }),
   ],
-  providers: [DataService],
+  providers: [
+    DataService,
+    { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

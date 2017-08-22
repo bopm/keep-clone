@@ -7,6 +7,8 @@ import { merge, without, clone, find } from 'lodash';
 export function reducer(state = dataModel.defaults, action: Action): dataModel.Data {
   let stateCopy = clone(state);
   switch (action.type) {
+    case data.ActionTypes.LOAD_SUCCESS:
+      return merge({}, state, {cards: action.payload});
     case data.ActionTypes.SERVER_ADD_SUCCESS:
       return merge({}, state, {cards: [ ...state.cards, action.payload ]});
     case data.ActionTypes.UPDATE_SUCCESS:

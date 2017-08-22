@@ -6,12 +6,23 @@ import * as data from '../actions/data';
 import {DataService} from '../services/data.service';
 import {of} from 'rxjs/observable/of';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/catch';
 import {ToasterService} from 'angular2-toaster';
 import { mapKeys, keys, isObject } from 'lodash';
 
 @Injectable()
 export class DataEffects {
+
+  @Effect()
+  load$: Observable<Action> = this.actions$
+    .ofType(data.ActionTypes.LOAD)
+    .debounceTime(300)
+    .map((action: data.UpdateAction) => action.payload)
+    .switchMap(payload => this.dataService.load()
+      .map(res => new data.LoadSuccessAction(res))
+      .catch(err => of(new data.ServerFailAction(err)))
+    );
 
   @Effect()
   add$: Observable<Action> = this.actions$
