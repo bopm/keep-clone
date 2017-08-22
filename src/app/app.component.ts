@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Store} from '@ngrx/store';
 import * as fromRoot from './reducers';
+import * as data from './actions/data';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import * as fromRoot from './reducers';
       <a class="navbar-brand" href="#">Keep Clone</a>
       <app-color-input></app-color-input>
     </nav>
+    <toaster-container></toaster-container>
     <div class="container-fluid text-center pb-5">
       <div class="row justify-content-end">
         <app-new-card-input></app-new-card-input>
@@ -27,5 +29,7 @@ export class AppComponent {
   constructor(private store: Store<fromRoot.State>) {
     // .takeWhile(() => this.alive) <- we don't care about this here, as if AppComponent going to be disposed, our app is done.
     this.toolbarColor$ = this.store.select(fromRoot.getToolbarColor);
+
+    this.store.dispatch(new data.RefreshTokenAction());
   }
 }

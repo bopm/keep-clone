@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import * as data from '../actions/data';
+import {clone} from 'lodash';
 
 @Component({
   selector: 'app-card-list',
@@ -54,7 +55,9 @@ export class CardListComponent implements OnInit, OnDestroy {
   }
 
   togglePinned(card) {
-    this.store.dispatch(new data.TogglePinnedAction(card));
+    let clonned = clone(card);
+    clonned.pinned = !clonned.pinned;
+    this.store.dispatch(new data.UpdateAction(clonned));
   }
 
   removeCard(card) {

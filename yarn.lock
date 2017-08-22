@@ -146,6 +146,10 @@
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@ngrx/core/-/core-1.2.0.tgz#882b46abafa2e0e6d887cb71a1b2c2fa3e6d0dc6"
 
+"@ngrx/effects@2":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-2.0.4.tgz#418eee5e1032fa66de5bbf1855653bb1951f12a4"
+
 "@ngrx/store@2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-2.2.1.tgz#316ec1e43aa5a0166e5e6e1aa2c34a4049386510"
@@ -267,6 +271,10 @@ alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
+
+angular2-toaster@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/angular2-toaster/-/angular2-toaster-4.0.1.tgz#587aef6df903cf5e2b7eba4047b54ec9a21b8e3b"
 
 ansi-escapes@^2.0.0:
   version "2.0.0"
@@ -3117,13 +3125,13 @@ ngrx-store-freeze@^0.1.9:
   dependencies:
     deep-freeze-strict "^1.1.1"
 
-ngrx-store-localstorage@^0.2.0:
+ngrx-store-localstorage@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/ngrx-store-localstorage/-/ngrx-store-localstorage-0.2.0.tgz#45e093dea915f0022e986b223044ce707eb0b420"
 
-ngrx-store-logger@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/ngrx-store-logger/-/ngrx-store-logger-0.2.0.tgz#9bef9447bc91d8e35a2aa6ae1c5a57ea51036694"
+ngrx-store-logger@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/ngrx-store-logger/-/ngrx-store-logger-0.1.0.tgz#c9b70ff6854ef50c3ae03c91d06456cffaa1dd1f"
 
 ngrx@^2.0.1:
   version "2.0.1"
