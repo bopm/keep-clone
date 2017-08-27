@@ -7,7 +7,7 @@ export const ActionTypes = {
 };
 
 export class SetToolbarColorAction implements Action {
-  type = ActionTypes.SET_TOOLBAR_COLOR;
+  readonly type = ActionTypes.SET_TOOLBAR_COLOR;
 
   constructor(public payload: string) { }
 }

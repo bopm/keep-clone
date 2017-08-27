@@ -15,8 +15,7 @@ import { mapKeys, keys, isObject } from 'lodash';
 export class DataEffects {
 
   @Effect()
-  load$: Observable<Action> = this.actions$
-    .ofType(data.ActionTypes.LOAD)
+  load$: Observable<Action> = this.actions$.ofType(data.ActionTypes.LOAD)
     .debounceTime(300)
     .map((action: data.UpdateAction) => action.payload)
     .switchMap(payload => this.dataService.load()
@@ -25,8 +24,7 @@ export class DataEffects {
     );
 
   @Effect()
-  add$: Observable<Action> = this.actions$
-    .ofType(data.ActionTypes.ADD)
+  add$: Observable<Action> = this.actions$.ofType(data.ActionTypes.ADD)
     .debounceTime(300)
     .map((action: data.UpdateAction) => action.payload)
     .switchMap(payload => this.dataService.add(payload)
@@ -35,8 +33,7 @@ export class DataEffects {
     );
 
   @Effect({dispatch: false})
-  addFail$: Observable<Action> = this.actions$
-    .ofType(data.ActionTypes.SERVER_FAIL)
+  addFail$: Observable<Action> = this.actions$.ofType(data.ActionTypes.SERVER_FAIL)
     .debounceTime(300)
     .map((action: data.UpdateAction) => action.payload)
     .switchMap(payload => {
@@ -48,8 +45,7 @@ export class DataEffects {
     });
 
   @Effect()
-  remove$: Observable<Action> = this.actions$
-    .ofType(data.ActionTypes.REMOVE)
+  remove$: Observable<Action> = this.actions$.ofType(data.ActionTypes.REMOVE)
     .debounceTime(300)
     .map((action: data.UpdateAction) => action.payload)
     .switchMap(payload => this.dataService.remove(payload)
@@ -58,8 +54,7 @@ export class DataEffects {
     );
 
   @Effect()
-  update$: Observable<Action> = this.actions$
-    .ofType(data.ActionTypes.UPDATE)
+  update$: Observable<Action> = this.actions$.ofType(data.ActionTypes.UPDATE)
     .debounceTime(300)
     .map((action: data.UpdateAction) => action.payload)
     .switchMap(payload => this.dataService.update(payload)
@@ -67,9 +62,8 @@ export class DataEffects {
       .catch(err => of(new data.ServerFailAction(err)))
     );
 
-  @Effect()
-  refreshToken$: Observable<Action> = this.actions$
-    .ofType(data.ActionTypes.REFRESH_TOKEN)
+  @Effect({dispatch: false})
+  refreshToken$: Observable<Action> = this.actions$.ofType(data.ActionTypes.REFRESH_TOKEN)
     .debounceTime(300)
     .switchMap(() => this.dataService.refreshToken());
 

@@ -4,7 +4,7 @@ import * as data from '../actions/data';
 import { merge, without, clone, find } from 'lodash';
 
 
-export function reducer(state = dataModel.defaults, action: Action): dataModel.Data {
+export function reducer(state = dataModel.defaults, action: data.Actions): dataModel.Data {
   let stateCopy = clone(state);
   switch (action.type) {
     case data.ActionTypes.LOAD_SUCCESS:

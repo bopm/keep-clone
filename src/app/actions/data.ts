@@ -19,73 +19,79 @@ export const ActionTypes = {
 };
 
 export class LoadAction implements Action {
-  type = ActionTypes.LOAD;
+  readonly type = ActionTypes.LOAD;
+
+  constructor(public payload: any) { }
 }
 
 export class LoadSuccessAction implements Action {
-  type = ActionTypes.LOAD_SUCCESS;
+  readonly type = ActionTypes.LOAD_SUCCESS;
 
   constructor(public payload: any) { }
 }
 
 export class AddAction implements Action {
-  type = ActionTypes.ADD;
+  readonly type = ActionTypes.ADD;
 
   constructor(public payload: string) { }
 }
 
 export class RemoveAction implements Action {
-  type = ActionTypes.REMOVE;
+  readonly type = ActionTypes.REMOVE;
 
   constructor(public payload: card) { }
 }
 
 export class RemoveSuccessAction implements Action {
-  type = ActionTypes.REMOVE_SUCCESS;
+  readonly type = ActionTypes.REMOVE_SUCCESS;
 
   constructor(public payload: card) { }
 }
 
 export class TogglePinnedAction implements Action {
-  type = ActionTypes.TOGGLE_PINNED;
+  readonly type = ActionTypes.TOGGLE_PINNED;
 
   constructor(public payload: card) { }
 }
 
 export class UpdateAction implements Action {
-  type = ActionTypes.UPDATE;
+  readonly type = ActionTypes.UPDATE;
 
   constructor(public payload: any) { }
 }
 
 export class UpdateSuccessAction implements Action {
-  type = ActionTypes.UPDATE_SUCCESS;
+  readonly type = ActionTypes.UPDATE_SUCCESS;
 
   constructor(public payload: any) { }
 }
 
 export class ServerAddSuccessAction implements Action {
-  type = ActionTypes.SERVER_ADD_SUCCESS;
+  readonly type = ActionTypes.SERVER_ADD_SUCCESS;
 
   constructor(public payload: any) { }
 }
 
 export class ServerFailAction implements Action {
-  type = ActionTypes.SERVER_FAIL;
+  readonly type = ActionTypes.SERVER_FAIL;
 
   constructor(public payload: any) { }
 }
 
 export class RefreshTokenAction implements Action {
-  type = ActionTypes.REFRESH_TOKEN;
+  readonly type = ActionTypes.REFRESH_TOKEN;
+
+  constructor(public payload: any) { }
 }
 export class RefreshTokenSuccessAction implements Action {
-  type = ActionTypes.REFRESH_TOKEN_SUCCESS;
+  readonly type = ActionTypes.REFRESH_TOKEN_SUCCESS;
 
   constructor(public payload: any) { }
 }
 export class RefreshTokenFailAction implements Action {
-  type = ActionTypes.REFRESH_TOKEN_FAIL;
+  readonly type = ActionTypes.REFRESH_TOKEN_FAIL;
+
+  constructor(public payload: any) { }
 }
 
 export type Actions

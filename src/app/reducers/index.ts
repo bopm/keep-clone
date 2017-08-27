@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
-import { ActionReducer } from '@ngrx/store';
-import { compose } from '@ngrx/core/compose';
+import {ActionReducer, ActionReducerMap, MetaReducer} from '@ngrx/store';
+import { compose } from '@ngrx/store';
 import { storeLogger } from 'ngrx-store-logger';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { storeFreeze } from 'ngrx-store-freeze';
@@ -19,21 +19,23 @@ export interface State {
   ui: uiModel.Ui;
 }
 
-const reducers = {
+export const reducers: ActionReducerMap<State> = {
   data: fromData.reducer,
   ui: fromUi.reducer
 };
 
-const developmentReducer: ActionReducer<State> = compose(storeLogger(), localStorageSync({keys: ['ui'], rehydrate: true}), storeFreeze, combineReducers)(reducers);
-const productionReducer: ActionReducer<State> = compose(localStorageSync({keys: ['ui'], rehydrate: true}), combineReducers)(reducers);
-
-export function reducer(state: any, action: any) {
-  if (environment.production) {
-    return productionReducer(state, action);
-  } else {
-    return developmentReducer(state, action);
-  }
+export function logger(reducer: ActionReducer<State>): any {
+  // default, no options
+  return storeLogger()(reducer);
 }
+
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  return localStorageSync({keys: ['ui'], rehydrate: true})(reducer);
+}
+
+export const metaReducers: MetaReducer<State>[] = !environment.production
+  ? [logger, localStorageSyncReducer]
+  : [localStorageSyncReducer];
 
 /* Data */
 

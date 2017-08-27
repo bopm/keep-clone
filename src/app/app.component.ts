@@ -28,6 +28,6 @@ export class AppComponent {
     // .takeWhile(() => this.alive) <- we don't care about this here, as if AppComponent going to be disposed, our app is done.
     this.toolbarColor$ = this.store.select(fromRoot.getToolbarColor);
 
-    this.store.dispatch(new data.RefreshTokenAction());
+    this.store.dispatch(new data.RefreshTokenAction({}));
   }
 }

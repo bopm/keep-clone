@@ -11,7 +11,7 @@ export class DataService {
   constructor(private http: HttpClient, private store: Store<fromRoot.State>) { }
 
   dispatchLoad() {
-    this.store.dispatch(new data.LoadAction());
+    this.store.dispatch(new data.LoadAction({}));
   }
 
   add(payload) {

@@ -4,7 +4,7 @@ import * as ui from '../actions/ui';
 import { merge } from 'lodash';
 
 
-export function reducer(state = uiModel.defaults, action: Action): uiModel.Ui {
+export function reducer(state = uiModel.defaults, action: ui.Actions): uiModel.Ui {
   switch (action.type) {
     case ui.ActionTypes.SET_TOOLBAR_COLOR:
       return merge({}, state, {toolbarColor: action.payload});

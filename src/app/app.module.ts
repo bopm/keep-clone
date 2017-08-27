@@ -3,7 +3,7 @@ import { NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader } from '@angula
 
 import { AppComponent } from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {reducer} from './reducers/index';
+import {reducers, metaReducers} from './reducers/index';
 import {StoreModule} from '@ngrx/store';
 import { ColorInputComponent } from './color-input/color-input.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -28,8 +28,8 @@ import {AboutComponent} from './about/about';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    StoreModule.provideStore(reducer),
-    EffectsModule.run(DataEffects),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([DataEffects]),
     ToasterModule,
     UIRouterModule.forRoot({
       states: MAIN_STATES,
