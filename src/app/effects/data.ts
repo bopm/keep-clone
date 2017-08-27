@@ -41,7 +41,7 @@ export class DataEffects {
         isObject(payload.error) ? keys(
           mapKeys(payload.error, (value: Array<string>, key: string) => `${key}: ${value.join(';')}`)).join(';') :
           payload.error);
-      return of({});
+      return of(null);
     });
 
   @Effect()
@@ -65,7 +65,7 @@ export class DataEffects {
   @Effect({dispatch: false})
   refreshToken$: Observable<Action> = this.actions$.ofType(data.ActionTypes.REFRESH_TOKEN)
     .debounceTime(300)
-    .switchMap(() => this.dataService.refreshToken());
+    .switchMap(() => this.dataService.refreshToken().map(() => null));
 
 
   constructor(private actions$: Actions, private dataService: DataService, private toasterService: ToasterService) {
